@@ -1,0 +1,5 @@
+.profile__profile-author {
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+}
