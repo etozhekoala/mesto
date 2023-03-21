@@ -1,0 +1,7 @@
+.elements__item {
+  max-width: 282px;
+  box-sizing: border-box;
+  display: block;
+  overflow: hidden;
+  border-radius: 10px;
+}
