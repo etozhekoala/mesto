@@ -4,3 +4,9 @@
   box-sizing: border-box;
   padding-bottom: 41px;
 }
+
+@media screen and (max-width: 767px) {
+  .header__logo {
+    padding: 0 19px 41px 19px;
+  }
+}

@@ -1,5 +1,11 @@
 .profile__profile-card {
   display: flex;
-  align-items: center;
-  gap: 30px;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__profile-card {
+    flex-direction: column;
+    align-items: center;
+    gap: 26px;
+  }
 }
