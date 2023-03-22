@@ -1,16 +1,16 @@
 .profile__profile-info {
   display: grid;
-  grid-template-columns: auto 18px;
+  grid-template-columns: minmax(auto, 294px) 24px;
   box-sizing: border-box;
-  text-align: center;
-  gap: 0 10px;
+  text-align: left;
   align-items: flex-end;
+  gap: 16px 18px;
 }
 
 @media screen and (max-width: 767px) {
   .profile__profile-info {
     grid-template-columns: minmax(auto, 189px) 18px;
     text-align: center;
-    gap: 0 10px;
+    gap: 14px 10px;
   }
 }

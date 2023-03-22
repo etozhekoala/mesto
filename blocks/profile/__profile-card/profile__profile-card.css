@@ -1,11 +1,12 @@
 .profile__profile-card {
   display: flex;
+  gap: 30px;
+  align-items: center;
 }
 
 @media screen and (max-width: 767px) {
   .profile__profile-card {
     flex-direction: column;
-    align-items: center;
     gap: 26px;
   }
 }
