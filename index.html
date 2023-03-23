@@ -14,12 +14,14 @@
     </div> 
   </header>
   <main class="main">
-    <section class="profile">
+    <section 
+      aria-label="Карточка профиля" 
+      class="profile">
       <div class="profile__profile-card">
       <img 
-          alt="Фотография Жак-Ив Кусто"
-          src="./images/Avatar.png" 
-          class="profile__image">
+        alt="Фотография Жак-Ив Кусто"
+        src="./images/Avatar.png" 
+        class="profile__image">
         <div class="profile__profile-info">
             <p class="profile__author-name">Жак-Ив Кусто</p>
             <button class="profile__edit-button"></button>
@@ -28,7 +30,9 @@
           </div>
         <button class="profile__add-button"></button>
     </section>
-    <section class="elements">
+    <section 
+    aria-label="Карточки профиля"
+      class="elements">
       <ul class="elements__items">
         <li class="elements__item">
           <img 
@@ -116,7 +120,9 @@
       © 2023 Mesto Russia
     </p>
   </footer>
-  <section class="popup">
+  <section 
+  aria-label="Окно редактирования имени и деятельности профиля"
+    class="popup">
     <div class="popup__container">
       <button class="popup__button-close"></button>
       <form class="popup__form">
@@ -126,10 +132,10 @@
         <fieldset class="popup__form-field">
             <input 
               type="text"
-              class="popup__form-input form-input__name-input">
+              class="popup__form-input popup__name-input">
             <input 
               type="text"
-              class="popup__form-input form-input__job-input">
+              class="popup__form-input popup__job-input">
         </fieldset>
         <button 
           type="submit"
@@ -137,6 +143,7 @@
           Сохранить
         </button>
       </form>
+    </div>
   </section>
   <script src="./index.js"></script>
 </body>
