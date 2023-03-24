@@ -36,5 +36,3 @@ function handleFormSubmit (event) {
 }
 
 popupForm.addEventListener('submit', handleFormSubmit);
-
-

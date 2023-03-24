@@ -4,13 +4,13 @@
   box-sizing: border-box;
   text-align: left;
   align-items: flex-end;
-  gap: 16px 18px;
+  gap: 7px 18px;
 }
 
 @media screen and (max-width: 767px) {
   .profile__profile-info {
     grid-template-columns: minmax(auto, 189px) 18px;
     text-align: center;
-    gap: 14px 10px;
+    gap: 7px 10px;
   }
 }

@@ -17,6 +17,7 @@
 
 @media screen and (max-width: 767px) {
   .profile {
+    gap: 33px;
     padding: 42px 19px 36px 19px;
     flex-direction: column;
   }
