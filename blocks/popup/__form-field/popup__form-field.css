@@ -6,3 +6,9 @@
   margin: 0;
   border: 0;
 }
+
+@media screen and (max-width: 767px) {
+  .popup__form-field {
+    padding: 0 0 45px 0;
+  }
+}

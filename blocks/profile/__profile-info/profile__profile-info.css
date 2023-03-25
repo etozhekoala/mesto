@@ -12,5 +12,6 @@
     grid-template-columns: minmax(auto, 189px) 18px;
     text-align: center;
     gap: 7px 10px;
+    margin-left:26px;
   }
 }
