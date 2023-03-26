@@ -5,6 +5,13 @@
   padding: 45px 200px 0 200px;
 }
 
+.header:after {
+  content: '';
+  display: block;
+  border-bottom: 1px solid #545454;
+  opacity: .7;
+}
+
 @media screen and (max-width: 767px) {
   .header {
     padding: 23px 0px 0px 0px;

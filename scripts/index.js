@@ -12,7 +12,7 @@ const authorJob = document.querySelector('.profile__author-description');
 
 btnOpen.addEventListener('click', () => {
   
-  popup.classList.add('popup__opened');
+  popup.classList.add('popup_opened');
 
   nameInput.value = authorName.textContent;
   jobInput.value = authorJob.textContent;
@@ -20,7 +20,7 @@ btnOpen.addEventListener('click', () => {
 
 btnClose.addEventListener('click', () => {
   
-  popup.classList.remove('popup__opened');
+  popup.classList.remove('popup_opened');
 
 });
 
@@ -31,7 +31,7 @@ function handleFormSubmit (event) {
   authorName.textContent = nameInput.value;
   authorJob.textContent = jobInput.value;
   
-  popup.classList.remove('popup__opened');
+  popup.classList.remove('popup_opened');
 
 }
 
