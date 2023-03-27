@@ -31,7 +31,6 @@ function handleFormSubmit (event) {
   authorName.textContent = nameInput.value;
   authorJob.textContent = jobInput.value;
   
-  // popup.classList.remove('popup_opened');
   closeForm()
 }
 
