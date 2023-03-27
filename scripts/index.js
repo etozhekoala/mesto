@@ -10,18 +10,6 @@ const btnClose = popup.querySelector('.popup__button-close');
 const authorName = document.querySelector('.profile__author-name');
 const authorJob = document.querySelector('.profile__author-description');
 
-
-function handleFormSubmit (event) {
-  
-  event.preventDefault();
-  
-  authorName.textContent = nameInput.value;
-  authorJob.textContent = jobInput.value;
-  
-  popup.classList.remove('popup_opened');
-  
-}
-
 function openForm() {
   popup.classList.add('popup_opened');
   
@@ -35,6 +23,18 @@ function closeForm() {
   popup.classList.remove('popup_opened');
 
 }
+
+function handleFormSubmit (event) {
+  
+  event.preventDefault();
+  
+  authorName.textContent = nameInput.value;
+  authorJob.textContent = jobInput.value;
+  
+  // popup.classList.remove('popup_opened');
+  closeForm()
+}
+
 
 btnOpen.addEventListener('click', openForm);
 btnClose.addEventListener('click', closeForm);

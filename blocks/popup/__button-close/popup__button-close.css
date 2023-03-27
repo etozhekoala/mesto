@@ -25,5 +25,6 @@
     height: 20px;
     right: 0;
     top: -36px;
+    background-image: url(../../../images/button-close-mobile.svg);
   }
 }
