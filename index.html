@@ -38,6 +38,29 @@
     aria-label="Карточки профиля"
       class="elements">
       <ul class="elements__items">
+      <template class="template__item">
+        <li class="elements__item">
+          <img 
+              alt="Старое здание в Карачаевске"
+              src="./images/imageKarachaevsk.jpg"
+              class="elements__image">
+          <div class="elements__item-info">
+            <h2 class="elements__item-title">
+              Карачаевск
+            </h2>
+            <button 
+              type="button"
+              class="elements__like-button elements__like-button_active">
+            </button>
+          </div>
+        </li>
+      </template>
+      </ul>
+    </section>
+    <!-- <section 
+    aria-label="Карточки профиля"
+      class="elements">
+      <ul class="elements__items">
         <li class="elements__item">
           <img 
               alt="Старое здание в Карачаевске"
@@ -129,7 +152,7 @@
           </div>
          </li>
       </ul>
-    </section>
+    </section> -->
   </main>
   <footer class="footer">
     <p class="footer__copyright">
@@ -138,7 +161,7 @@
   </footer>
   <section 
     aria-label="Окно редактирования имени и деятельности профиля"
-    class="popup">
+    class="popup popup__edit-profile">
     <div class="popup__container">
       <button 
         type="button"
@@ -169,6 +192,40 @@
       </form>
     </div>
   </section>
+  <section 
+  aria-label="Окно добавления карточки"
+  class="popup popup__add-card">
+  <div class="popup__container">
+    <button 
+      type="button"
+      class="popup__button-close"></button>
+      <h2 class="popup__form-name">
+        Новое место
+      </h2>
+    <form 
+      name="form" 
+      class="popup__form">
+      <fieldset class="popup__form-field">
+          <input 
+            placeholder="Название"
+            type="text"
+            name="name"
+            class="popup__form-input popup__form-input_type_title">
+          <input 
+            placeholder="Ссылка на картинку"
+            name="job"
+            type="text"
+            class="popup__form-input popup__form-input_type_link">
+      </fieldset>
+      <button 
+        type="submit"
+        class="popup__button-submit">
+        Создать
+      </button>
+    </form>
+  </div>
+</section>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/cards.js"></script>
 </body>
 </html>

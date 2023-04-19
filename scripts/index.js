@@ -35,6 +35,7 @@ function handleFormSubmit (event) {
 }
 
 
-btnOpen.addEventListener('click', openForm);
+btnOpen.addEventListener('click', openForm);  
 btnClose.addEventListener('click', closeForm);
 popupForm.addEventListener('submit', handleFormSubmit);
+
