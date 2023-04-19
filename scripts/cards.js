@@ -38,6 +38,19 @@ const createCardElement = (cardData) => {
   cardImage.src = cardData.link;
   cardImage.alt = cardData.name;
 
+  const deleteBtn = cardElement.querySelector('.elements__delete-button');
+  const handleDelete = () => {
+    cardElement.remove();
+  }
+  deleteBtn.addEventListener('click', handleDelete);
+
+  const likeBtn = cardElement.querySelector('.elements__like-button');
+  const handleLike = () => {
+    likeBtn.classList.toggle('elements__like-button_active')
+  }
+
+  likeBtn.addEventListener('click', handleLike);
+
   return cardElement;
 }
 

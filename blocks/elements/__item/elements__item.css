@@ -3,5 +3,6 @@
   box-sizing: border-box;
   display: block;
   overflow: hidden;
+  position: relative;
   border-radius: 10px;
 }
