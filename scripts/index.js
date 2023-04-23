@@ -1,6 +1,6 @@
 const popup = document.querySelector('.popup');
-const editForm = document.querySelector('.popup__edit-profile');
-const addCardForm = document.querySelector('.popup__add-card');
+const editForm = document.querySelector('.edit-profile');
+const addCardForm = document.querySelector('.add-card');
 const popupForm = popup.querySelector('.popup__form');
 const formEditTitleCard = document.querySelector('.popup__form_type_add-card');
 
@@ -18,10 +18,10 @@ const authorJob = document.querySelector('.profile__author-description');
 const titleInput = formEditTitleCard.querySelector('.popup__form-input_type_title');
 const linkInput = formEditTitleCard.querySelector('.popup__form-input_type_link');
 
-const templateItem = document.querySelector('.template__item');
+const templateItem = document.querySelector('.elements__template-item');
 const cardContainer = document.querySelector('.elements__items');
 
-const popupFullscreen = document.querySelector('.popup__fullscreen');
+const popupFullscreen = document.querySelector('.fullscreen');
 const fullImage = popupFullscreen.querySelector('.popup__image-fullscreen');
 const fullTitleCard = document.querySelector('.popup__fullscreen-title');
 const fullscreenCloseBtn = popupFullscreen.querySelector('.popup__button-close')
