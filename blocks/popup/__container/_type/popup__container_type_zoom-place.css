@@ -1,0 +1,11 @@
+.popup__container_type_zoom-place {
+  max-width: 75vw;
+  width: auto;
+  max-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  gap: 10px;
+  background-color: transparent;
+  box-shadow: none;
+}

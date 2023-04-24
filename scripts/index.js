@@ -1,30 +1,27 @@
-const popup = document.querySelector('.popup');
-const editForm = document.querySelector('.edit-profile');
-const addCardForm = document.querySelector('.add-card');
-const popupForm = popup.querySelector('.popup__form');
-const formEditTitleCard = document.querySelector('.popup__form_type_add-card');
-
-const nameInput = popup.querySelector('.popup__form-input_type_name');
-const jobInput = popup.querySelector('.popup__form-input_type_job')
-
-const btnAddCard = document.querySelector('.profile__add-button');
-const btnOpen = document.querySelector('.profile__edit-button');
-const btnClose = popup.querySelector('.popup__button-close');
-const closeAddCard = addCardForm.querySelector('.popup__button-close')
-
-const authorName = document.querySelector('.profile__author-name');
-const authorJob = document.querySelector('.profile__author-description');
-
-const titleInput = formEditTitleCard.querySelector('.popup__form-input_type_title');
-const linkInput = formEditTitleCard.querySelector('.popup__form-input_type_link');
-
-const templateItem = document.querySelector('.elements__template-item');
+const profileInfo = document.querySelector('.profile__profile-info');
 const cardContainer = document.querySelector('.elements__items');
+const templateItem = document.querySelector('.elements__template-item');
 
-const popupFullscreen = document.querySelector('.fullscreen');
-const fullImage = popupFullscreen.querySelector('.popup__image-fullscreen');
-const fullTitleCard = document.querySelector('.popup__fullscreen-title');
-const fullscreenCloseBtn = popupFullscreen.querySelector('.popup__button-close')
+const editProfilePopup = document.querySelector('.popup_type_edit-profile');
+const editProfileButtonOpen = document.querySelector('.profile__edit-button');
+const editProfileForm = editProfilePopup.querySelector('.popup__form_type_profile-edit');
+const editProfileNameInput = editProfilePopup.querySelector('.popup__form-input_type_name');
+const editProfileJobInput = editProfilePopup.querySelector('.popup__form-input_type_job');
+const editProfileAuthorName = profileInfo.querySelector('.profile__author-name');
+const editProfileAuthorJob = profileInfo.querySelector('.profile__author-description');
+const editProfileButtonClose = editProfilePopup.querySelector('.button-close_type_edit-popup');
+
+const addCardPopup = document.querySelector('.popup_type_add-card');
+const addCardButtonOpen = document.querySelector('.profile__add-button');
+const addCardEditForm = addCardPopup.querySelector('.popup__form_type_add-card');
+const addCardTitleInput = addCardEditForm.querySelector('.popup__form-input_type_title');
+const addCardLinkInput = addCardEditForm.querySelector('.popup__form-input_type_link');
+const addCardButtonClose = addCardPopup.querySelector('.button-close_type_add-card');
+
+const fullscreenPopup = document.querySelector('.popup_type_fullscreen');
+const fullscreenImage = fullscreenPopup.querySelector('.popup__image-fullscreen');
+const fullscreenTitleCard = fullscreenPopup.querySelector('.popup__fullscreen-title');
+const fullscreenCloseButton = fullscreenPopup.querySelector('.popup__button-close');
 
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
@@ -59,10 +56,10 @@ const createCardElement = (cardData) => {
 
   const handleFullScreen = () => {
     
-    fullImage.src = cardImage.src;
-    fullImage.alt = cardName.textContent;
-    fullTitleCard.textContent = cardName.textContent;
-    openPopup(popupFullscreen);
+    fullscreenImage.src = cardImage.src;
+    fullscreenImage.alt = cardName.textContent;
+    fullscreenTitleCard.textContent = cardName.textContent;
+    openPopup(fullscreenPopup);
   }
 
   cardImage.addEventListener('click', handleFullScreen);
@@ -71,71 +68,67 @@ const createCardElement = (cardData) => {
 };
 
   const renderCardElement = (cardElement) => {
-    cardContainer.prepend(cardElement);
+    cardContainer.append(cardElement);
 }
 
   initialCards.forEach((card) => { 
     renderCardElement(createCardElement(card));
 })
 
-const handlerEditCardSubmit = (event) => {
-  event.preventDefault();
+  const handleAddCardFormSubmit = (event) => {
+    event.preventDefault();
 
-  const name = titleInput.value;
-  const link = linkInput.value;
+    const name = addCardTitleInput.value;
+    const link = addCardLinkInput.value;
 
-  const newCardData = {
-    name, link,
-  };
-
-  renderCardElement(createCardElement(newCardData));
-  closePopup(addCardForm);
-  formEditTitleCard.reset();
+    const newCardData = {
+      name, link,
 };
 
-function openForm() {
-  openPopup(editForm);
+  cardContainer.prepend(createCardElement(newCardData));
+  closePopup(addCardPopup);
+  addCardEditForm.reset();
+};
+
+function openProfileEditForm() {
+  openPopup(editProfilePopup);
   
-  nameInput.value = authorName.textContent;
-  jobInput.value = authorJob.textContent;
+  editProfileNameInput.value = editProfileAuthorName.textContent;
+  editProfileJobInput.value = editProfileAuthorJob.textContent;
 }
 
-function handleFormSubmit (event) {
+function handleProfileFormSubmit (event) {
   
   event.preventDefault();
   
-  authorName.textContent = nameInput.value;
-  authorJob.textContent = jobInput.value;
+  editProfileAuthorName.textContent = editProfileNameInput.value;
+  editProfileAuthorJob.textContent = editProfileJobInput.value;
 
-  closePopup(editForm);
+  closePopup(editProfilePopup);
 
 };
 
-btnOpen.addEventListener('click', () => {
-  openForm(editForm);
+editProfileButtonOpen.addEventListener('click', () => {
+  openProfileEditForm(editProfilePopup);
 });
 
-btnClose.addEventListener('click', () => {
-  closePopup(editForm);
+editProfileButtonClose.addEventListener('click', () => {
+  closePopup(editProfilePopup);
 });
 
-btnClose.addEventListener('click', () => {
-  closePopup(addCardForm);
+editProfileForm.addEventListener('submit', handleProfileFormSubmit);
+
+addCardButtonOpen.addEventListener('click', () => {
+  openPopup(addCardPopup);
 });
 
-closeAddCard.addEventListener('click', () => {
-  closePopup(addCardForm);
+addCardButtonClose.addEventListener('click', () => {
+  closePopup(addCardPopup);
 });
 
-btnAddCard.addEventListener('click', () => {
-  openPopup(addCardForm);
-});
+addCardEditForm.addEventListener('submit', handleAddCardFormSubmit);
 
-popupForm.addEventListener('submit', handleFormSubmit);
-
-formEditTitleCard.addEventListener('submit', handlerEditCardSubmit);
-
-fullscreenCloseBtn.addEventListener('click', () => {
-  closePopup(popupFullscreen);
+fullscreenCloseButton.addEventListener('click', () => {
+  closePopup(fullscreenPopup);
 });
 

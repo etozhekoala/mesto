@@ -69,18 +69,18 @@
   </footer>
   <section 
     aria-label="Окно редактирования имени и деятельности профиля"
-    class="popup edit-profile">
+    class="popup popup_type_edit-profile">
     <div class="popup__container">
       <button 
         type="button"
-        class="popup__button-close"></button>
+        class="popup__button-close button-close_type_edit-popup"></button>
         <h2 class="popup__form-name">
           Редактировать профиль
         </h2>
       <form 
         name="form" 
-        class="popup__form">
-        <fieldset class="popup__form-field">
+        class="popup__form popup__form_type_profile-edit">
+        <div class="popup__form-field">
             <input 
               placeholder="Имя"
               type="text"
@@ -91,7 +91,7 @@
               name="job"
               type="text"
               class="popup__form-input popup__form-input_type_job">
-        </fieldset>
+        </div>
         <button 
           type="submit"
           class="popup__button-submit">
@@ -102,18 +102,18 @@
   </section>
   <section 
   aria-label="Окно добавления карточки"
-  class="popup add-card">
+  class="popup popup_type_add-card">
   <div class="popup__container">
     <button 
       type="button"
-      class="popup__button-close"></button>
+      class="popup__button-close button-close_type_add-card"></button>
       <h2 class="popup__form-name">
         Новое место
       </h2>
     <form 
       name="form" 
       class="popup__form popup__form_type_add-card">
-      <fieldset class="popup__form-field">
+      <div class="popup__form-field">
           <input 
             placeholder="Название"
             type="text"
@@ -124,7 +124,7 @@
             name="job"
             type="text"
             class="popup__form-input popup__form-input_type_link">
-      </fieldset>
+      </div>
       <button 
         type="submit"
         class="popup__button-submit">
@@ -133,17 +133,16 @@
     </form>
   </div>
 </section>
-<section class="popup fullscreen" aria-label="Окно увеличения изображения">
-  <div class="popup__image-container">
+<section class="popup popup_type_fullscreen" aria-label="Окно увеличения изображения">
+  <div class="popup__container popup__container_type_zoom-place">
     <button 
         type="button"
         class="popup__button-close"></button>
     <img
-      src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg"
+      src="#"
       alt="Попап"
       class="popup__image-fullscreen">
     <h3 class="popup__fullscreen-title">
-      Байкал
     </h3>
   </div>
 </section>
