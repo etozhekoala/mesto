@@ -60,32 +60,31 @@ const createCardElement = (cardData) => {
     fullscreenImage.alt = cardName.textContent;
     fullscreenTitleCard.textContent = cardName.textContent;
     openPopup(fullscreenPopup);
-  }
+  };
 
   cardImage.addEventListener('click', handleFullScreen);
-
+  
   return cardElement;
 };
 
-  const renderCardElement = (cardElement) => {
-    cardContainer.append(cardElement);
-}
-
-  initialCards.forEach((card) => { 
-    renderCardElement(createCardElement(card));
-})
-
-  const handleAddCardFormSubmit = (event) => {
-    event.preventDefault();
-
-    const name = addCardTitleInput.value;
-    const link = addCardLinkInput.value;
-
-    const newCardData = {
-      name, link,
+const renderCardElement = (cardElement) => {
+  cardContainer.append(cardElement);
 };
 
-  cardContainer.prepend(createCardElement(newCardData));
+initialCards.forEach((card) => { 
+  renderCardElement(createCardElement(card));
+});
+
+const handleAddCardFormSubmit = (event) => {
+  event.preventDefault();
+  const name = addCardTitleInput.value;
+  const link = addCardLinkInput.value;
+  
+  const newCardData = {
+    name, link,
+};
+
+cardContainer.prepend(createCardElement(newCardData));
   closePopup(addCardPopup);
   addCardEditForm.reset();
 };
@@ -95,7 +94,7 @@ function openProfileEditForm() {
   
   editProfileNameInput.value = editProfileAuthorName.textContent;
   editProfileJobInput.value = editProfileAuthorJob.textContent;
-}
+};
 
 function handleProfileFormSubmit (event) {
   
@@ -105,7 +104,6 @@ function handleProfileFormSubmit (event) {
   editProfileAuthorJob.textContent = editProfileJobInput.value;
 
   closePopup(editProfilePopup);
-
 };
 
 editProfileButtonOpen.addEventListener('click', () => {
