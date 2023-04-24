@@ -2,26 +2,26 @@ const profileInfo = document.querySelector('.profile__profile-info');
 const cardContainer = document.querySelector('.elements__items');
 const templateItem = document.querySelector('.elements__template-item');
 
-const editProfilePopup = document.querySelector('.popup_type_edit-profile');
 const editProfileButtonOpen = document.querySelector('.profile__edit-button');
+const editProfilePopup = document.querySelector('.popup_type_edit-profile');
+const editProfileButtonClose = editProfilePopup.querySelector('.button-close_type_edit-popup');
 const editProfileForm = editProfilePopup.querySelector('.popup__form_type_profile-edit');
 const editProfileNameInput = editProfilePopup.querySelector('.popup__form-input_type_name');
 const editProfileJobInput = editProfilePopup.querySelector('.popup__form-input_type_job');
 const editProfileAuthorName = profileInfo.querySelector('.profile__author-name');
 const editProfileAuthorJob = profileInfo.querySelector('.profile__author-description');
-const editProfileButtonClose = editProfilePopup.querySelector('.button-close_type_edit-popup');
 
-const addCardPopup = document.querySelector('.popup_type_add-card');
 const addCardButtonOpen = document.querySelector('.profile__add-button');
+const addCardPopup = document.querySelector('.popup_type_add-card');
+const addCardButtonClose = addCardPopup.querySelector('.button-close_type_add-card');
 const addCardEditForm = addCardPopup.querySelector('.popup__form_type_add-card');
 const addCardTitleInput = addCardEditForm.querySelector('.popup__form-input_type_title');
 const addCardLinkInput = addCardEditForm.querySelector('.popup__form-input_type_link');
-const addCardButtonClose = addCardPopup.querySelector('.button-close_type_add-card');
 
 const fullscreenPopup = document.querySelector('.popup_type_fullscreen');
+const fullscreenCloseButton = fullscreenPopup.querySelector('.popup__button-close');
 const fullscreenImage = fullscreenPopup.querySelector('.popup__image-fullscreen');
 const fullscreenTitleCard = fullscreenPopup.querySelector('.popup__fullscreen-title');
-const fullscreenCloseButton = fullscreenPopup.querySelector('.popup__button-close');
 
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
