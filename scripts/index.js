@@ -25,10 +25,19 @@ const fullscreenTitleCard = fullscreenPopup.querySelector('.popup__fullscreen-ti
 
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByEsc);
 };
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEsc);
+};
+
+const closePopupByEsc = (event) => {
+  if (event.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  };
 };
 
 const createCardElement = (cardData) => {
@@ -61,7 +70,6 @@ const createCardElement = (cardData) => {
     fullscreenImage.src = cardImage.src;
     fullscreenImage.alt = cardName.textContent;
     fullscreenTitleCard.textContent = cardName.textContent;
-
     openPopup(fullscreenPopup);
   };
 
@@ -85,12 +93,14 @@ const handleAddCardFormSubmit = (event) => {
 
   const newCardData = {
     name, link,
-};
+  };
 
-cardContainer.prepend(createCardElement(newCardData));
+  cardContainer.prepend(createCardElement(newCardData));
   closePopup(addCardPopup);
   addCardEditForm.reset();
+  disableSubmit(addCardPopup);
 };
+
 
 function openProfileEditForm() {
   openPopup(editProfilePopup);
@@ -117,13 +127,7 @@ editProfileButtonClose.addEventListener('click', () => {
   closePopup(editProfilePopup);
 });
 
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    closePopup(editProfilePopup)
-  }
-})
-
-document.addEventListener('click', (event) => {
+editProfilePopup.addEventListener('click', (event) => {
   if (event.target === editProfilePopup) {
     closePopup(editProfilePopup);
   }
@@ -139,13 +143,7 @@ addCardButtonClose.addEventListener('click', () => {
   closePopup(addCardPopup);
 });
 
-document.addEventListener('keydown', (event) => {
-  if ( event.key === 'Escape') {
-    closePopup(addCardPopup);
-  }
-});
-
-document.addEventListener('click', (event) => {
+addCardPopup.addEventListener('click', (event) => {
   if (event.target === addCardPopup) {
     closePopup(addCardPopup);
   }
@@ -157,14 +155,14 @@ fullscreenCloseButton.addEventListener('click', () => {
   closePopup(fullscreenPopup);
 });
 
-document.addEventListener('keydown', (event) => {
-  if ( event.key === 'Escape' ) {
-    closePopup(fullscreenPopup);
-  };
-});
-
-document.addEventListener('click', (event) => {
+fullscreenPopup.addEventListener('click', (event) => {
   if (event.target === fullscreenPopup) {
     closePopup(fullscreenPopup);
   }
 });
+
+const disableSubmit = () => {
+  const button = document.querySelector('.popup__submit-button_add');
+  button.classList.add('popup__button-submit_disabled');
+  button.setAttribute("disabled", true);
+};
