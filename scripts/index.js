@@ -98,7 +98,7 @@ const handleAddCardFormSubmit = (event) => {
   cardContainer.prepend(createCardElement(newCardData));
   closePopup(addCardPopup);
   addCardEditForm.reset();
-  disableSubmit(addCardPopup);
+  disabledSubmitAddCard(addCardPopup);
 };
 
 
@@ -161,8 +161,8 @@ fullscreenPopup.addEventListener('click', (event) => {
   }
 });
 
-const disableSubmit = () => {
-  const button = document.querySelector('.popup__submit-button_add');
+const disabledSubmitAddCard = () => {
+  const button = addCardEditForm.querySelector('.popup__button-submit');
   button.classList.add('popup__button-submit_disabled');
   button.setAttribute("disabled", true);
 };
