@@ -101,7 +101,6 @@ const handleAddCardFormSubmit = (event) => {
   disabledSubmitAddCard(addCardPopup);
 };
 
-
 function openProfileEditForm() {
   openPopup(editProfilePopup);
 
