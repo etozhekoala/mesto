@@ -1,5 +1,7 @@
-import { Card } from './Card.js';
 import { openPopup, closePopup } from '../utils/utils.js';
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
 
 const profileInfo = document.querySelector('.profile__profile-info');
 const cardContainer = document.querySelector('.elements__items');
@@ -25,7 +27,7 @@ const fullscreenCloseButton = fullscreenPopup.querySelector('.popup__button-clos
 
 const renderCardElement = (data) => {
   const cardElement = new Card("#elements__template-item", data, openPopup).createCardElement();
-  cardContainer.append(cardElement);
+  cardContainer.prepend(cardElement);
 };
 
 initialCards.forEach((card) => {
@@ -41,7 +43,7 @@ const handleAddCardFormSubmit = (event) => {
     name, link,
   };
 
-  cardContainer.prepend(renderCardElement(newCardData));
+  renderCardElement(newCardData);
   closePopup(addCardPopup);
   addCardEditForm.reset();
   disabledSubmitAddCard(addCardPopup);

@@ -4,7 +4,6 @@ export class Card {
   _templateSelector;
   _data;
   _openFullscreen;
-  _handleAddCardFormSubmit;
   
   _getTemplate() {
     const cardTemplate =  document
