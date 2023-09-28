@@ -1,4 +1,4 @@
-import { openPopup, closePopup } from '../utils/utils.js';
+import { openPopup, closePopup, enableValidation } from '../utils/utils.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 
@@ -29,6 +29,12 @@ const renderCardElement = (data) => {
   const cardElement = new Card("#elements__template-item", data, openPopup).createCardElement();
   cardContainer.prepend(cardElement);
 };
+
+const validateAddForm = new FormValidator(addCardPopup, enableValidation);
+  validateAddForm.enableValidation();
+
+const validateEditForm = new FormValidator(editProfilePopup, enableValidation);
+  validateEditForm.enableValidation();
 
 initialCards.forEach((card) => {
   renderCardElement(card);
