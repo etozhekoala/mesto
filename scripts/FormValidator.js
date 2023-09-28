@@ -1,4 +1,4 @@
-export class FormValidator {
+export  default class FormValidator {
   _formElement;
   _enableValidation;
 
@@ -70,5 +70,5 @@ export class FormValidator {
       event.preventDefault();
     });
     this._setEventListeners();
-  }
+  };
 };
