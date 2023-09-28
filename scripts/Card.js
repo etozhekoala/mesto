@@ -37,15 +37,7 @@ export default class Card {
     this._openFullscreen = openFullscreen;
   };
 
-  createCardElement() {
-    this._cardElement = this._getTemplate();
-    this._cardName = this._cardElement.querySelector('.elements__item-title');
-    this._cardImage = this._cardElement.querySelector('.elements__image');
-
-    this._cardName.textContent = this._data.name;
-    this._cardImage.src = this._data.link;
-    this._cardImage.alt = this._data.name;
-    
+  _setEventListeners() {
     this._cardElement.querySelector('.elements__delete-button').addEventListener('click', () => {
       this._handleDelete();
     });
@@ -60,7 +52,18 @@ export default class Card {
     this._cardImage.addEventListener('click', () => {
       this._handleFullscreen();
     });
-    
+  }
+
+  createCardElement() {
+    this._cardElement = this._getTemplate();
+    this._cardName = this._cardElement.querySelector('.elements__item-title');
+    this._cardImage = this._cardElement.querySelector('.elements__image');
+    this._setEventListeners()
+
+    this._cardName.textContent = this._data.name;
+    this._cardImage.src = this._data.link;
+    this._cardImage.alt = this._data.name;
+
     return this._cardElement;
   };
 };
