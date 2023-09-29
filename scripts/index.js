@@ -25,11 +25,6 @@ const addCardLinkInput = addCardEditForm.querySelector('.popup__form-input_type_
 const fullscreenPopup = document.querySelector('.popup_type_fullscreen');
 const fullscreenCloseButton = fullscreenPopup.querySelector('.popup__button-close_type_fullscreen');
 
-const renderCardElement = (data) => {
-  const cardElement = new Card("#elements__template-item", data, openPopup).createCardElement();
-  cardContainer.prepend(cardElement);
-};
-
 const validateAddForm = new FormValidator(addCardPopup, enableValidation);
   validateAddForm.enableValidation();
 
@@ -37,7 +32,7 @@ const validateEditForm = new FormValidator(editProfilePopup, enableValidation);
   validateEditForm.enableValidation();
 
 initialCards.forEach((card) => {
-  renderCardElement(card);
+  cardContainer.prepend(createCard(card));
 });
 
 const handleAddCardFormSubmit = (event) => {
@@ -49,15 +44,19 @@ const handleAddCardFormSubmit = (event) => {
     name, link,
   };
 
-  renderCardElement(newCardData);
+  cardContainer.prepend(createCard(newCardData));
   closePopup(addCardPopup);
   addCardEditForm.reset();
-  disabledSubmitAddCard(addCardPopup);
+};
+
+function createCard (data) {
+  const cardElement = new Card("#elements__template-item", data, openPopup);
+  const cardAdd = cardElement.createCardElement()
+  return cardAdd;
 };
 
 function openProfileEditForm() {
   openPopup(editProfilePopup);
-
   editProfileNameInput.value = editProfileAuthorName.textContent;
   editProfileJobInput.value = editProfileAuthorJob.textContent;
 };
@@ -74,6 +73,7 @@ function handleProfileFormSubmit (event) {
 
 editProfileButtonOpen.addEventListener('click', () => {
   openProfileEditForm(editProfilePopup);
+  validateEditForm.resetValidation();
 });
 
 editProfileButtonClose.addEventListener('click', () => {
@@ -90,6 +90,7 @@ editProfileForm.addEventListener('submit', handleProfileFormSubmit);
 
 addCardButtonOpen.addEventListener('click', () => {
   openPopup(addCardPopup);
+  validateAddForm.resetValidation();
 });
 
 addCardButtonClose.addEventListener('click', () => {
@@ -113,9 +114,3 @@ fullscreenPopup.addEventListener('click', (event) => {
     closePopup(fullscreenPopup);
   }
 });
-
-const disabledSubmitAddCard = () => {
-  const button = addCardEditForm.querySelector('.popup__button-submit');
-  button.classList.add('popup__button-submit_disabled');
-  button.setAttribute("disabled", true);
-};
