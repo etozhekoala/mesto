@@ -1,26 +1,26 @@
 export  default class FormValidator {
 
-  _validationOptions;
+  _config;
   _formElement;
   
-  constructor(validationOptions, formElement) {
-    this._validationOptions = validationOptions;
+  constructor(config, formElement) {
+    this._config = config;
     this._formElement = formElement;
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._validationOptions.inputSelector));
-    this._buttonElement = this._formElement.querySelector(this._validationOptions.submitButtonSelector);
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._config.submitButtonSelector);
   };
 
   _showInputError(inputElement, errorMessage) {
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.add(this._validationOptions.inputErrorClass);
+    inputElement.classList.add(this._config.inputErrorClass);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add(this._validationOptions.errorClass);
+    errorElement.classList.add(this._config.errorClass);
   };
 
   _hideInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.remove(this._validationOptions.inputErrorClass);
-    errorElement.classList.remove(this._validationOptions.errorClass);
+    inputElement.classList.remove(this._config.inputErrorClass);
+    errorElement.classList.remove(this._config.errorClass);
     errorElement.textContent = '';
   };
 
@@ -39,12 +39,12 @@ export  default class FormValidator {
   };
 
   _disableSubmitButton() {
-    this._buttonElement.classList.add(this._validationOptions.inactiveButtonClass);
+    this._buttonElement.classList.add(this._config.inactiveButtonClass);
     this._buttonElement.disabled = true;
   };
 
   _enableSubmitButton() {
-    this._buttonElement.classList.remove(this._validationOptions.inactiveButtonClass);
+    this._buttonElement.classList.remove(this._config.inactiveButtonClass);
     this._buttonElement.disabled = false;
   };
 
