@@ -8,7 +8,7 @@ export const closePopup = (popup) => {
   document.removeEventListener('keydown', closePopupByEsc);
 };
 
-export const enableValidation = {
+export const validationOptions = {
   formSelector: '.popup__form',
   inputSelector: '.popup__form-input',
   submitButtonSelector: '.popup__button-submit',

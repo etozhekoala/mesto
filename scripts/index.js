@@ -1,7 +1,7 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import { initialCards } from './cards.js';
-import { openPopup, closePopup, enableValidation } from '../utils/utils.js';
+import { openPopup, closePopup, validationOptions } from '../utils/utils.js';
 
 const profileInfo = document.querySelector('.profile__profile-info');
 const cardContainer = document.querySelector('.elements__items');
@@ -25,10 +25,10 @@ const addCardLinkInput = addCardEditForm.querySelector('.popup__form-input_type_
 const fullscreenPopup = document.querySelector('.popup_type_fullscreen');
 const fullscreenCloseButton = fullscreenPopup.querySelector('.popup__button-close_type_fullscreen');
 
-const validateAddForm = new FormValidator(enableValidation, addCardPopup);
+const validateAddForm = new FormValidator(validationOptions, addCardPopup);
   validateAddForm.enableValidation();
 
-const validateEditForm = new FormValidator(enableValidation, editProfilePopup);
+const validateEditForm = new FormValidator(validationOptions, editProfilePopup);
   validateEditForm.enableValidation();
 
 initialCards.forEach((card) => {
