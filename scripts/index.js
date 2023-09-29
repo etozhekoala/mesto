@@ -65,17 +65,17 @@ const closePopupByEsc = (event) => {
   };
 };
 
+function createCard (data) {
+  const cardElement = new Card("#elements__template-item", data, handleOpenPopup);
+  const cardAdd = cardElement.createCardElement()
+  return cardAdd;
+};
+
 function handleOpenPopup(name, link) {
   fullscreenImage.src = link;
   fullscreenImage.alt = name;
   fullscreenTitleCard.textContent = name;
   openPopup(fullscreenPopup);
-};
-
-function createCard (data) {
-  const cardElement = new Card("#elements__template-item", data, handleOpenPopup);
-  const cardAdd = cardElement.createCardElement()
-  return cardAdd;
 };
 
 function openProfileEditForm() {
