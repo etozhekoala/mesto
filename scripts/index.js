@@ -1,7 +1,7 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import { initialCards } from './cards.js';
-import { openPopup, closePopup, validationOptions } from '../utils/utils.js';
+import { validationOptions } from '../utils/utils.js';
 
 const profileInfo = document.querySelector('.profile__profile-info');
 const cardContainer = document.querySelector('.elements__items');
@@ -23,6 +23,8 @@ const addCardTitleInput = addCardEditForm.querySelector('.popup__form-input_type
 const addCardLinkInput = addCardEditForm.querySelector('.popup__form-input_type_link');
 
 const fullscreenPopup = document.querySelector('.popup_type_fullscreen');
+const fullscreenImage = fullscreenPopup.querySelector('.popup__image-fullscreen');
+const fullscreenTitleCard = fullscreenPopup.querySelector('.popup__fullscreen-title');
 const fullscreenCloseButton = fullscreenPopup.querySelector('.popup__button-close_type_fullscreen');
 
 const validateAddForm = new FormValidator(validationOptions, addCardPopup);
@@ -30,10 +32,6 @@ const validateAddForm = new FormValidator(validationOptions, addCardPopup);
 
 const validateEditForm = new FormValidator(validationOptions, editProfilePopup);
   validateEditForm.enableValidation();
-
-initialCards.forEach((card) => {
-  cardContainer.prepend(createCard(card));
-});
 
 const handleAddCardFormSubmit = (event) => {
   event.preventDefault();
@@ -49,8 +47,33 @@ const handleAddCardFormSubmit = (event) => {
   addCardEditForm.reset();
 };
 
+
+const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByEsc);
+};
+  
+const closePopup = (popup) => {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEsc);
+};
+
+const closePopupByEsc = (event) => {
+  if (event.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  };
+};
+
+function handleOpenPopup(name, link) {
+  fullscreenImage.src = link;
+  fullscreenImage.alt = name;
+  fullscreenTitleCard.textContent = name;
+  openPopup(fullscreenPopup);
+};
+
 function createCard (data) {
-  const cardElement = new Card("#elements__template-item", data, openPopup);
+  const cardElement = new Card("#elements__template-item", data, handleOpenPopup);
   const cardAdd = cardElement.createCardElement()
   return cardAdd;
 };
@@ -70,6 +93,10 @@ function handleProfileFormSubmit (event) {
 
   closePopup(editProfilePopup);
 };
+
+initialCards.forEach((card) => {
+  cardContainer.prepend(createCard(card));
+});
 
 editProfileButtonOpen.addEventListener('click', () => {
   openProfileEditForm(editProfilePopup);
