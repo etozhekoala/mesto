@@ -25,10 +25,10 @@ const addCardLinkInput = addCardEditForm.querySelector('.popup__form-input_type_
 const fullscreenPopup = document.querySelector('.popup_type_fullscreen');
 const fullscreenCloseButton = fullscreenPopup.querySelector('.popup__button-close_type_fullscreen');
 
-const validateAddForm = new FormValidator(addCardPopup, enableValidation);
+const validateAddForm = new FormValidator(enableValidation, addCardPopup);
   validateAddForm.enableValidation();
 
-const validateEditForm = new FormValidator(editProfilePopup, enableValidation);
+const validateEditForm = new FormValidator(enableValidation, editProfilePopup);
   validateEditForm.enableValidation();
 
 initialCards.forEach((card) => {
