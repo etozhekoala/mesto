@@ -1,5 +1,5 @@
 export default class UserInfo {
-  constructor({editProfileNameInput, editProfileJobInput}) {
+  constructor({editProfileNameInput , editProfileJobInput}) {
     this._editProfileNameInput = document.querySelector(editProfileNameInput);
     this._editProfileJobInput = document.querySelector(editProfileJobInput);
   }
