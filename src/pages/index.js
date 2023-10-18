@@ -25,8 +25,8 @@ const api = new Api({
   headers: {
     authorization: 'b60af95c-ee22-4623-b633-9ce86ed2ed6a',
     'Content-Type': 'application/json'
-  }
-});
+  }}
+);
 
 const validateAddForm = new FormValidator(validationOptions, addCardPopup);
   validateAddForm.enableValidation();
@@ -39,6 +39,13 @@ const cardList = new Section({items: initialCards, renderer: (data) => {
     cardList.addItem(card);
   }}, ".elements__items"
 );
+
+api.getInitialCards()
+      .then((cards) => {
+        console.log('cards =', cards)
+
+        cardList.renderItems(cards);
+      })
 
 const fullScreenPopup = new PopupWithImage('.popup_type_fullscreen');
 
