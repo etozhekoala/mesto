@@ -7,7 +7,6 @@ import UserInfo from '../components/UserInfo.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupConfirm from '../components/PopupConfirm';
-import { initialCards } from '../utils/cards.js';
 import { validationOptions } from '../utils/constants.js';
 import { 
   editProfileButtonOpen,
@@ -34,7 +33,7 @@ const validateAddForm = new FormValidator(validationOptions, addCardPopup);
 const validateEditForm = new FormValidator(validationOptions, editProfilePopup);
   validateEditForm.enableValidation();
 
-const cardList = new Section({items: initialCards, renderer: (data) => {
+const cardList = new Section({renderer: (data) => {
     const card = createCard(data);
     cardList.addItem(card);
   }}, ".elements__items"
@@ -45,7 +44,8 @@ api.getInitialCards()
         console.log('cards =', cards)
 
         cardList.renderItems(cards);
-      })
+})
+
 
 const fullScreenPopup = new PopupWithImage('.popup_type_fullscreen');
 
@@ -78,8 +78,6 @@ function getDataPopupProfile() {
   editProfileNameInput.value = profileData.name;
   editProfileJobInput.value = profileData.job;
 }
-
-cardList.renderItems();
 
 fullScreenPopup.setEventListeners();
 
