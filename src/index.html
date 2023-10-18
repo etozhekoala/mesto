@@ -177,5 +177,28 @@
       </h3>
     </div>
   </section>
+  <section 
+    aria-label="Окно подтверждения удаления"
+    id="popup_confirm"
+    class="popup popup_confirm">
+    <div class="popup__container">
+      <button
+        type="button"
+        class="popup__button-close popup__button-close_type_confirm">
+      </button>
+      <h2 class="popup__form-name popup__form-name_confirm">
+        Вы уверены?
+      </h2>
+      <form 
+        name="form" 
+        class="popup__form popup__form_type_confirm" novalidate>
+        <button
+          type="submit"
+          class="popup__button-submit">
+            Сохранить
+        </button>
+      </form>
+    </div>
+  </section>
 </body>
 </html>

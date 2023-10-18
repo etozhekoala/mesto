@@ -1,10 +1,12 @@
 import './index.css';
+import Api from '../components/Api.js';
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import FormValidator from '../components/FormValidator.js';
 import UserInfo from '../components/UserInfo.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupConfirm from '../components/PopupConfirm';
 import { initialCards } from '../utils/cards.js';
 import { validationOptions } from '../utils/constants.js';
 import { 
@@ -17,6 +19,14 @@ import {
   addCardTitleInput,
   addCardLinkInput,
 } from '../utils/constants.js';
+
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-77',
+  headers: {
+    authorization: 'b60af95c-ee22-4623-b633-9ce86ed2ed6a',
+    'Content-Type': 'application/json'
+  }
+});
 
 const validateAddForm = new FormValidator(validationOptions, addCardPopup);
   validateAddForm.enableValidation();
@@ -50,6 +60,7 @@ const popupEditProfile = new PopupWithForm({popupSelector: '#popup_type_edit-pro
     userInfo.setUserInfo(data.name, data.job);
 }});
 
+const popupConfirm = new PopupConfirm('#popup_confirm');
 
 function handleCardClick(cardTitle, cardImg) {
   fullScreenPopup.open(cardTitle, cardImg);
@@ -68,6 +79,8 @@ fullScreenPopup.setEventListeners();
 popupAddCard.setEventListeners();
 
 popupEditProfile.setEventListeners();
+
+popupConfirm.setEventListeners();
 
 addCardButtonOpen.addEventListener('click', () => {
   popupAddCard.open();
