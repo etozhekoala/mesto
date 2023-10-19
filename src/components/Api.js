@@ -1,11 +1,3 @@
-const onError = (response) => {
-  if (response.ok) {
-    return response.json()
-  } else {
-    Promise.reject(`Ошибка: ${response.status} ${response.statusText}`)
-  }
-}
-
 export default class Api {
   constructor({url, headers}) {
     this._url = url;
@@ -40,16 +32,13 @@ export default class Api {
         Promise.reject(`Ошибка: ${response.status} ${response.statusText}`)
       }
     })
-  }
+  } 
 
   editUserProfile(data) {
     return fetch(`${this._url}/users/me`, {
       headers: this._headers,
       method: 'PATCH',
-      body: JSON.stringify({
-        name: data.name,
-        about: data.about
-      })
+      body: JSON.stringify({name: data.name, about: data.about})
     })
 
     .then((response) => {

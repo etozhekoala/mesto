@@ -82,12 +82,13 @@ const popupAddCard = new PopupWithForm({popupSelector: '#popup_type_add-card', h
 const userInfo = new UserInfo({nameInputSelector: '.profile__author-name', jobInputSelector: '.profile__author-description'});
 
 const popupEditProfile = new PopupWithForm({popupSelector: '#popup_type_edit-profile', handleProfileFormSubmit: (data) => {
-  api.editUserProfile(data)
+  api.editUserProfile({name: data.name, about: data.job})
     .then((response) => {
       userInfo.setUserInfo(response); 
     })  
-  
-  // userInfo.setUserInfo(data.name, data.job);
+    .catch((error) => {
+      console.log(error);
+  })
 }});
 
 const popupConfirm = new PopupConfirm('#popup_confirm');
