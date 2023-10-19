@@ -42,10 +42,14 @@ export default class Api {
     })
   }
 
-  editUserProfile() {
+  editUserProfile(data) {
     return fetch(`${this._url}/users/me`, {
       headers: this._headers,
-      method: 'GET',
+      method: 'PATCH',
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about
+      })
     })
 
     .then((response) => {

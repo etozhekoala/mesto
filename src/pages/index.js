@@ -27,6 +27,9 @@ const api = new Api({
   }}
 );
 
+let userId
+let cardId
+
 Promise.all([api.getUserProfile(), api.getInitialCards()])
   .then(([profileData, cards]) => {
     userId = profileData._id;
@@ -79,7 +82,12 @@ const popupAddCard = new PopupWithForm({popupSelector: '#popup_type_add-card', h
 const userInfo = new UserInfo({nameInputSelector: '.profile__author-name', jobInputSelector: '.profile__author-description'});
 
 const popupEditProfile = new PopupWithForm({popupSelector: '#popup_type_edit-profile', handleProfileFormSubmit: (data) => {
-    userInfo.setUserInfo(data.name, data.job);
+  api.editUserProfile(data)
+    .then((response) => {
+      userInfo.setUserInfo(response); 
+    })  
+  
+  // userInfo.setUserInfo(data.name, data.job);
 }});
 
 const popupConfirm = new PopupConfirm('#popup_confirm');
@@ -91,7 +99,7 @@ function handleCardClick(cardTitle, cardImg) {
 function getDataPopupProfile() {
   const profileData = userInfo.getUserInfo();
   editProfileNameInput.value = profileData.name;
-  editProfileJobInput.value = profileData.job;
+  editProfileJobInput.value = profileData.about;
 }
 
 fullScreenPopup.setEventListeners();
