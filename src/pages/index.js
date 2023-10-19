@@ -27,6 +27,18 @@ const api = new Api({
   }}
 );
 
+Promise.all([api.getUserProfile(), api.getInitialCards()])
+  .then(([profileData, cards]) => {
+    userId = profileData._id;
+    cardId = cards._id;
+    userInfo.setUserInfo(profileData);
+    cardList.renderItems(cards);
+  })
+
+  .catch((error) => {
+    console.log(`Ошибка: ${error}`)
+  })
+
 const validateAddForm = new FormValidator(validationOptions, addCardPopup);
   validateAddForm.enableValidation();
 
@@ -39,12 +51,15 @@ const cardList = new Section({renderer: (data) => {
   }}, ".elements__items"
 );
 
-api.getInitialCards()
-      .then((cards) => {
-        console.log('cards =', cards)
+// api.getInitialCards()
+//   .then((cards) => {
+//     console.log('cards', cards)
+//     cardList.renderItems(cards);
+// })
 
-        cardList.renderItems(cards);
-})
+//   .catch((error) => {
+//     console.log('getCards error', error)
+//   })
 
 
 const fullScreenPopup = new PopupWithImage('.popup_type_fullscreen');

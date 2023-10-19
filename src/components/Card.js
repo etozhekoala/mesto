@@ -38,6 +38,10 @@ export default class Card {
     });
   };
 
+  getCardId() {
+    return this._data._id;
+  }
+
   createCardElement() {
     this._cardElement = this._getTemplate();
     this._cardName = this._cardElement.querySelector('.elements__item-title');
