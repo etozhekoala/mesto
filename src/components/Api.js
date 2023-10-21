@@ -50,11 +50,11 @@ export default class Api {
     })
   }
 
-  addCard({name}) {
-    return fetch(`${this._url}/cards/`, {
+  addCard(data) {
+    return fetch(`${this._url}/cards`, {
       headers: this._headers,
       method: 'POST',
-      body: JSON.stringify({name})
+      body: JSON.stringify({name: data.name, link: data.link})
     })
 
     .then((response) => {
@@ -66,8 +66,43 @@ export default class Api {
     })
   }
 
-  deleteCard(id) {
+  addLike(cardId) {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
+      headers: this._headers,
+      method: 'PUT',
+    })
 
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        Promise.reject(`Ошибка: ${response.status} ${response.statusText}`)
+      }
+    })
   }
+
+  removeLikeCard(cardId) { // Снятие лайка
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
+        headers: this._headers,
+        method: 'DELETE'
+    })
+    
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        Promise.reject(`Ошибка: ${response.status} ${response.statusText}`)
+      }
+    })
+}
+
+deleteCard(cardId) {
+  return fetch(`${this._url}/cards/${cardId}`, {
+      headers: this._headers,
+      method: 'DELETE'
+  })
+      .then(this._handleResponse)
+}
+
 }
 

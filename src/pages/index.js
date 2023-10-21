@@ -30,12 +30,13 @@ const api = new Api({
 let userId
 let cardId
 
+
 Promise.all([api.getUserProfile(), api.getInitialCards()])
-  .then(([profileData, cards]) => {
-    userId = profileData._id;
-    cardId = cards._id;
-    userInfo.setUserInfo(profileData);
-    cardList.renderItems(cards);
+  .then(([userData, cardData]) => {
+    userId = userData._id;
+    cardId = cardData._id;
+    userInfo.setUserInfo(userData);
+    cardList.renderItems(cardData);
   })
 
   .catch((error) => {
@@ -54,29 +55,16 @@ const cardList = new Section({renderer: (data) => {
   }}, ".elements__items"
 );
 
-// api.getInitialCards()
-//   .then((cards) => {
-//     console.log('cards', cards)
-//     cardList.renderItems(cards);
-// })
-
-//   .catch((error) => {
-//     console.log('getCards error', error)
-//   })
-
-
 const fullScreenPopup = new PopupWithImage('.popup_type_fullscreen');
 
-function createCard (data) {
-  const cardElement = new Card("#elements__template-item", data, handleCardClick);
-  const cardAdd = cardElement.createCardElement()
-  return cardAdd;
-};
-
 const popupAddCard = new PopupWithForm({popupSelector: '#popup_type_add-card', handleProfileFormSubmit: (data) => {
-  const newCard = {name:data[addCardTitleInput.name], link:data[addCardLinkInput.name]};
-  const cardAddElement = createCard(newCard);
-  cardList.addItem(cardAddElement);
+  api.addCard({name:data[addCardTitleInput.name], link:data[addCardLinkInput.name]})
+    .then((data) => {
+      cardList.addItem(createCard(data));
+    })
+    .catch((error) => {
+      console.log(error);
+  })
 }});
 
 const userInfo = new UserInfo({nameInputSelector: '.profile__author-name', jobInputSelector: '.profile__author-description'});
@@ -97,11 +85,43 @@ function handleCardClick(cardTitle, cardImg) {
   fullScreenPopup.open(cardTitle, cardImg);
 }
 
+
 function getDataPopupProfile() {
   const profileData = userInfo.getUserInfo();
   editProfileNameInput.value = profileData.name;
   editProfileJobInput.value = profileData.about;
 }
+
+function createCard (data) {
+  const cardElement = new Card("#elements__template-item", data, handleCardClick, {
+    likes: data.likes,
+    ownerId: data.owner._id,
+    cardId: cardId,
+    userId: userId,
+    handleSetLike: (cardId) => {
+      api.addLike(cardId)
+      .then((data) => {
+        cardElement.changeCountLikes(data)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
+
+    handleDeleteLike: (cardId) => { 
+    api.removeLikeCard(cardId)
+        .then((data) => {
+            cardElement.changeCountLikes(data)
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+  },
+}   
+  );
+  const cardAdd = cardElement.createCardElement()
+  return cardAdd;
+};
 
 fullScreenPopup.setEventListeners();
 
