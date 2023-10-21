@@ -116,12 +116,29 @@ function createCard (data) {
         .catch((err) => {
             console.log(err);
         })
-  },
-}   
-  );
+    },
+
+    deleteItemCard: (cardId) => {
+      popupConfirm.open();
+      popupConfirm.submitAction(() => {
+        api.deleteCard(cardId)
+          .then(() => {
+            cardElement.handleDeleteCard()
+            popupConfirm.close()
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+    }
+  }   
+);
+
   const cardAdd = cardElement.createCardElement()
   return cardAdd;
 };
+
+
 
 fullScreenPopup.setEventListeners();
 

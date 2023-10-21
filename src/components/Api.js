@@ -81,7 +81,7 @@ export default class Api {
     })
   }
 
-  removeLikeCard(cardId) { // Снятие лайка
+  removeLikeCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
         headers: this._headers,
         method: 'DELETE'
@@ -94,15 +94,22 @@ export default class Api {
         Promise.reject(`Ошибка: ${response.status} ${response.statusText}`)
       }
     })
-}
+  }
 
-deleteCard(cardId) {
-  return fetch(`${this._url}/cards/${cardId}`, {
-      headers: this._headers,
-      method: 'DELETE'
-  })
-      .then(this._handleResponse)
-}
+  deleteCard(cardId) {
+    return fetch(`${this._url}/cards/${cardId}`, {
+        headers: this._headers,
+        method: 'DELETE'
+    })
+    
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        Promise.reject(`Ошибка: ${response.status} ${response.statusText}`)
+      }
+    })
+  }
 
 }
 
