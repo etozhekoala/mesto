@@ -22,3 +22,10 @@ export const validationOptions = {
   inputErrorClass: 'popup__form-input_type_error',
   errorClass: 'popup__error_visible'
 };
+
+export const configApi = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort-77',
+  headers: {
+    authorization: 'b60af95c-ee22-4623-b633-9ce86ed2ed6a',
+    'Content-Type': 'application/json'
+  }}

@@ -19,19 +19,13 @@ import {
   avatarEditButton,
   addCardTitleInput,
   addCardLinkInput,
+  configApi
 } from '../utils/constants.js';
 
-const api = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-77',
-  headers: {
-    authorization: 'b60af95c-ee22-4623-b633-9ce86ed2ed6a',
-    'Content-Type': 'application/json'
-  }}
-);
+const api = new Api(configApi)
 
 let userId
 let cardId
-
 
 Promise.all([api.getUserProfile(), api.getInitialCards()])
   .then(([userData, cardData]) => {
@@ -46,13 +40,10 @@ Promise.all([api.getUserProfile(), api.getInitialCards()])
   })
 
 const validateAddForm = new FormValidator(validationOptions, addCardPopup);
-  validateAddForm.enableValidation();
 
 const validateEditForm = new FormValidator(validationOptions, editProfilePopup);
-  validateEditForm.enableValidation();
 
 const validateEditAvatarForm = new FormValidator(validationOptions, EditAvatarPopup);
-  validateEditAvatarForm.enableValidation();
 
 const cardList = new Section({renderer: (data) => {
     const card = createCard(data);
@@ -66,7 +57,7 @@ const popupAddCard = new PopupWithForm({popupSelector: '#popup_type_add-card', h
   popupAddCard.renderPreloader(true);
   api.addCard({name:data[addCardTitleInput.name], link:data[addCardLinkInput.name]})
     .then((data) => {
-      cardList.addItem(createCard(data));
+      cardList.addNewItem(createCard(data));
     })
     .catch((error) => {
       console.log(error);
@@ -168,7 +159,11 @@ function createCard (data) {
   return cardAdd;
 };
 
+validateAddForm.enableValidation();
 
+validateEditForm.enableValidation();
+
+validateEditAvatarForm.enableValidation();
 
 fullScreenPopup.setEventListeners();
 
@@ -179,7 +174,6 @@ popupEditProfile.setEventListeners();
 popupEditAvatar.setEventListeners();
 
 popupConfirm.setEventListeners();
-
 
 addCardButtonOpen.addEventListener('click', () => {
   popupAddCard.open();

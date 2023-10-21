@@ -1,6 +1,6 @@
 .profile__profile-info {
   display: grid;
-  grid-template-columns: minmax(auto, 294px) 24px;
+  grid-template-columns: auto auto;
   box-sizing: border-box;
   text-align: left;
   align-items: flex-end;
@@ -9,7 +9,6 @@
 
 @media screen and (max-width: 767px) {
   .profile__profile-info {
-    grid-template-columns: minmax(auto, 189px) 18px;
     text-align: center;
     gap: 7px 10px;
     margin-left:26px;
