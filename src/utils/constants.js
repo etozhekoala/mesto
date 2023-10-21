@@ -7,6 +7,9 @@ export const editProfileJobInput = editProfilePopup.querySelector('.popup__form-
 export const addCardButtonOpen = document.querySelector('.profile__add-button');
 export const addCardPopup = document.querySelector('.popup_type_add-card');
 
+export const EditAvatarPopup = document.querySelector('#popup_type_edit-avatar');
+export const avatarEditButton = document.querySelector('.profile__avatar-button');
+
 export const addCardEditForm = addCardPopup.querySelector('.popup__form_type_add-card');
 export const addCardTitleInput = addCardEditForm.querySelector('.popup__form-input_type_title');
 export const addCardLinkInput = addCardEditForm.querySelector('.popup__form-input_type_link');

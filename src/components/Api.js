@@ -111,5 +111,20 @@ export default class Api {
     })
   }
 
+  editAvatar(data) {
+    return fetch(`${this._url}/users/me/avatar`, {
+      headers: this._headers,
+      method: 'PATCH',
+      body: JSON.stringify({avatar: data.avatar})
+    })
+
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        Promise.reject(`Ошибка: ${response.status} ${response.statusText}`)
+      }
+    })
+  }
 }
 

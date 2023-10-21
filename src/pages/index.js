@@ -15,6 +15,8 @@ import {
   editProfileJobInput,
   addCardButtonOpen,
   addCardPopup,
+  EditAvatarPopup,
+  avatarEditButton,
   addCardTitleInput,
   addCardLinkInput,
 } from '../utils/constants.js';
@@ -49,6 +51,9 @@ const validateAddForm = new FormValidator(validationOptions, addCardPopup);
 const validateEditForm = new FormValidator(validationOptions, editProfilePopup);
   validateEditForm.enableValidation();
 
+const validateEditAvatarForm = new FormValidator(validationOptions, EditAvatarPopup);
+  validateEditAvatarForm.enableValidation();
+
 const cardList = new Section({renderer: (data) => {
     const card = createCard(data);
     cardList.addItem(card);
@@ -72,7 +77,7 @@ const popupAddCard = new PopupWithForm({popupSelector: '#popup_type_add-card', h
   }
 });
 
-const userInfo = new UserInfo({nameInputSelector: '.profile__author-name', jobInputSelector: '.profile__author-description'});
+const userInfo = new UserInfo({nameInputSelector: '.profile__author-name', jobInputSelector: '.profile__author-description', avatarSelector: '.profile__image'});
 
 const popupEditProfile = new PopupWithForm({popupSelector: '#popup_type_edit-profile', handleProfileFormSubmit: (data) => {
   popupEditProfile.renderPreloader(true);
@@ -88,6 +93,21 @@ const popupEditProfile = new PopupWithForm({popupSelector: '#popup_type_edit-pro
     })
   }
 });
+
+const popupEditAvatar = new PopupWithForm({popupSelector: '#popup_type_edit-avatar', handleProfileFormSubmit: (data) => { 
+  popupEditAvatar.renderPreloader(true); 
+  api.editAvatar(data) 
+    .then((response) => { 
+      userInfo.setUserInfo(response) 
+    }) 
+    .catch((error) => { 
+      console.log(error); 
+    }) 
+    .finally(() => { 
+      popupEditAvatar.renderPreloader(false); 
+    }) 
+  } 
+}) 
 
 const popupConfirm = new PopupConfirm('#popup_confirm');
 
@@ -156,7 +176,10 @@ popupAddCard.setEventListeners();
 
 popupEditProfile.setEventListeners();
 
+popupEditAvatar.setEventListeners();
+
 popupConfirm.setEventListeners();
+
 
 addCardButtonOpen.addEventListener('click', () => {
   popupAddCard.open();
@@ -166,4 +189,9 @@ addCardButtonOpen.addEventListener('click', () => {
 editProfileButtonOpen.addEventListener('click', () => {
   popupEditProfile.open();
   getDataPopupProfile();
+});
+
+avatarEditButton.addEventListener('click', () => {
+  popupEditAvatar.open();
+  validateEditAvatarForm.resetValidation();
 });
