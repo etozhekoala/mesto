@@ -115,7 +115,7 @@ export default class Api {
     return fetch(`${this._url}/users/me/avatar`, {
       headers: this._headers,
       method: 'PATCH',
-      body: JSON.stringify({avatar: data.avatar})
+      body: JSON.stringify({avatar: data.linkPicture})
     })
 
     .then((response) => {
@@ -127,4 +127,3 @@ export default class Api {
     })
   }
 }
-
