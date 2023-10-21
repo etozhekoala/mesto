@@ -58,6 +58,7 @@ const cardList = new Section({renderer: (data) => {
 const fullScreenPopup = new PopupWithImage('.popup_type_fullscreen');
 
 const popupAddCard = new PopupWithForm({popupSelector: '#popup_type_add-card', handleProfileFormSubmit: (data) => {
+  popupAddCard.renderPreloader(true);
   api.addCard({name:data[addCardTitleInput.name], link:data[addCardLinkInput.name]})
     .then((data) => {
       cardList.addItem(createCard(data));
@@ -65,19 +66,28 @@ const popupAddCard = new PopupWithForm({popupSelector: '#popup_type_add-card', h
     .catch((error) => {
       console.log(error);
   })
-}});
+    .finally(() => {
+      popupAddCard.renderPreloader(false);
+    })
+  }
+});
 
 const userInfo = new UserInfo({nameInputSelector: '.profile__author-name', jobInputSelector: '.profile__author-description'});
 
 const popupEditProfile = new PopupWithForm({popupSelector: '#popup_type_edit-profile', handleProfileFormSubmit: (data) => {
+  popupEditProfile.renderPreloader(true);
   api.editUserProfile({name: data.name, about: data.job})
     .then((response) => {
       userInfo.setUserInfo(response); 
     })  
     .catch((error) => {
       console.log(error);
-  })
-}});
+    })
+    .finally(() => {
+      popupEditProfile.renderPreloader(false);
+    })
+  }
+});
 
 const popupConfirm = new PopupConfirm('#popup_confirm');
 
@@ -105,7 +115,7 @@ function createCard (data) {
       })
       .catch((error) => {
         console.log(error);
-      });
+      })
     },
 
     handleDeleteLike: (cardId) => { 
