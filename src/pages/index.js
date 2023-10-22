@@ -25,12 +25,10 @@ import {
 const api = new Api(configApi)
 
 let userId
-let cardId
 
 Promise.all([api.getUserProfile(), api.getInitialCards()])
   .then(([userData, cardData]) => {
     userId = userData._id;
-    cardId = cardData._id;
     userInfo.setUserInfo(userData);
     cardList.renderItems(cardData);
   })
@@ -58,6 +56,7 @@ const popupAddCard = new PopupWithForm({popupSelector: '#popup_type_add-card', h
   api.addCard({name:data[addCardTitleInput.name], link:data[addCardLinkInput.name]})
     .then((data) => {
       cardList.addNewItem(createCard(data));
+      popupAddCard.close();
     })
     .catch((error) => {
       console.log(error);
@@ -75,6 +74,7 @@ const popupEditProfile = new PopupWithForm({popupSelector: '#popup_type_edit-pro
   api.editUserProfile({name: data.name, about: data.job})
     .then((response) => {
       userInfo.setUserInfo(response); 
+      popupEditProfile.close();
     })  
     .catch((error) => {
       console.log(error);
@@ -89,7 +89,8 @@ const popupEditAvatar = new PopupWithForm({popupSelector: '#popup_type_edit-avat
   popupEditAvatar.renderPreloader(true); 
   api.editAvatar(data) 
     .then((response) => { 
-      userInfo.setUserInfo(response) 
+      userInfo.setUserInfo(response);
+      popupEditAvatar.close();
     }) 
     .catch((error) => { 
       console.log(error); 
@@ -115,12 +116,9 @@ function getDataPopupProfile() {
 
 function createCard (data) {
   const cardElement = new Card("#elements__template-item", data, handleCardClick, {
-    likes: data.likes,
-    ownerId: data.owner._id,
-    cardId: cardId,
     userId: userId,
-    handleSetLike: (cardId) => {
-      api.addLike(cardId)
+    handleSetLike: (cardData) => {
+      api.addLike(cardData)
       .then((data) => {
         cardElement.changeCountLikes(data)
       })
@@ -129,8 +127,8 @@ function createCard (data) {
       })
     },
 
-    handleDeleteLike: (cardId) => { 
-    api.removeLikeCard(cardId)
+    handleDeleteLike: (cardData) => { 
+    api.removeLikeCard(cardData)
         .then((data) => {
             cardElement.changeCountLikes(data)
         })
@@ -139,10 +137,10 @@ function createCard (data) {
         })
     },
 
-    deleteItemCard: (cardId) => {
+    deleteItemCard: (cardData) => {
       popupConfirm.open();
       popupConfirm.submitAction(() => {
-        api.deleteCard(cardId)
+        api.deleteCard(cardData)
           .then(() => {
             cardElement.handleDeleteCard()
             popupConfirm.close()
